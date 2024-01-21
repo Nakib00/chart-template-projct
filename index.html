@@ -5,540 +5,100 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>IoT Pisciculture Monitoring System </title>
-      <!-- plugins:css -->
-      <link rel="stylesheet" href="vendors/feather/feather.css">
-      <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
-      <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-      <link rel="stylesheet" href="vendors/typicons/typicons.css">
-      <link rel="stylesheet" href="vendors/simple-line-icons/css/simple-line-icons.css">
-      <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.4.0/justgage.min.js"></script>
       <!-- endinject -->
-      <!-- Plugin css for this page -->
-      <!-- End plugin css for this page -->
-      <!-- inject:css -->
-      <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+      <link rel="stylesheet" href="style.css">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
       <!-- endinject -->
       <link rel="shortcut icon" href="images/favicon.png" />
    </head>
+
    <body>
-      <div class="container-scroller">
-      <!-- partial:partials/_navbar.html -->
-      <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
-         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-            <div class="me-3">
-               <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
-               <span class="icon-menu"></span>
-               </button>
+
+    <div class="container">
+        <!-- Header Section -->
+        <div class="pb-3 m-3">
+            <h1 class="text-center">IoT Pisciculture Monitoring System</h1>
+            <p class="text-center">Your performance summary this week</p>
+        </div>
+    
+        <!-- Gauge Section -->
+        <div class="row m-3">
+            <!-- Row 1 -->
+            <div class="col-lg-4 col-md-6 col-sm-12" id="phGauge">
+                <div class="gauge-title">pH</div>
             </div>
-            <div>
-               <a class="navbar-brand brand-logo" href="index.html">
-               <img src="images/sherr.png" alt="logo" />
-               </a>
-               <a class="navbar-brand brand-logo-mini" href="index.html">
-               <img src="images/" alt="logo" />
-               </a>
+            <div class="col-lg-4 col-md-6 col-sm-12" id="dissolvedOxygenGauge">
+                <div class="gauge-title">Dissolved Oxygen (mg/L)</div>
             </div>
-         </div>
-         <div class="navbar-menu-wrapper d-flex align-items-top">
-            <ul class="navbar-nav">
-               <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-                  <h1 class="welcome-text">IoT Pisciculture <span class="text-black fw-bold">Monitoring System</span></h1>
-                  <h3 class="welcome-sub-text">Your performance summary this week </h3>
-               </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
-               <li class="nav-item">
-                  <a class="nav-link" href="#" id="downloadButton">
-                  <i class="icon-download"></i> Download
-                  </a>
-                  <script>
-                     document.getElementById('downloadButton').addEventListener('click', function() {
-                         // Add logic here for the download functionality
-                         alert('Download button clicked!'); // Replace this alert with actual download logic
-                     });
-                  </script>
-               </li>
-               <li class="nav-item dropdown d-none d-lg-block user-dropdown">
-                  <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="Profile image"> </a>
-                  <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                     <div class="dropdown-header text-center">
-                        <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
-                        <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-                        <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
-                     </div>
-                     <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-                     <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
-                     <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
-                     <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
-                     <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
-                  </div>
-               </li>
-            </ul>
-            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-bs-toggle="offcanvas">
-            <span class="mdi mdi-menu"></span>
-            </button>
-         </div>
-      </nav>
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_settings-panel.html -->
-      <div class="theme-setting-wrapper">
-         <div id="settings-trigger"><i class="ti-settings"></i></div>
-         <div id="theme-settings" class="settings-panel">
-            <i class="settings-close ti-close"></i>
-            <p class="settings-heading">SIDEBAR SKINS</p>
-            <div class="sidebar-bg-options selected" id="sidebar-light-theme">
-               <div class="img-ss rounded-circle bg-light border me-3"></div>
-               Light
+            <div class="col-lg-4 col-md-6 col-sm-12" id="orpGauge">
+                <div class="gauge-title">ORP (mV)</div>
+            </div>     
+        </div>
+        
+        <!-- Row 2 -->
+        <div class="row m-3">
+            <div class="col-lg-3 col-md-6 col-sm-12" id="conductivityGauge">
+                <div class="gauge-title">Conductivity (µS/cm)</div>
             </div>
-            <div class="sidebar-bg-options" id="sidebar-dark-theme">
-               <div class="img-ss rounded-circle bg-dark border me-3"></div>
-               Dark
+            <div class="col-lg-3 col-md-6 col-sm-12" id="temperatureGauge">
+                <div class="gauge-title">Temperature (°C)</div>
             </div>
-            <p class="settings-heading mt-2">HEADER SKINS</p>
-            <div class="color-tiles mx-0 px-4">
-               <div class="tiles success"></div>
-               <div class="tiles warning"></div>
-               <div class="tiles danger"></div>
-               <div class="tiles info"></div>
-               <div class="tiles dark"></div>
-               <div class="tiles default"></div>
+            <div class="col-lg-3 col-md-6 col-sm-12" id="tdsGauge">
+                <div class="gauge-title">Total Dissolved Solids (TDS ppm)</div>
             </div>
-         </div>
-      </div>
-      <div id="right-sidebar" class="settings-panel">
-         <i class="settings-close ti-close"></i>
-         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-            <li class="nav-item">
-               <a class="nav-link active" id="todo-tab" data-bs-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" id="chats-tab" data-bs-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
-            </li>
-         </ul>
-         <div class="tab-content" id="setting-content">
-            <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
-               <div class="add-items d-flex px-3 mb-0">
-                  <form class="form w-100">
-                     <div class="form-group d-flex">
-                        <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
-                        <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
-                     </div>
-                  </form>
-               </div>
-               <div class="list-wrapper px-3">
-                  <ul class="d-flex flex-column-reverse todo-list">
-                     <li>
-                        <div class="form-check">
-                           <label class="form-check-label">
-                           <input class="checkbox" type="checkbox">
-                           Team review meeting at 3.00 PM
-                           </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                     </li>
-                     <li>
-                        <div class="form-check">
-                           <label class="form-check-label">
-                           <input class="checkbox" type="checkbox">
-                           Prepare for presentation
-                           </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                     </li>
-                     <li>
-                        <div class="form-check">
-                           <label class="form-check-label">
-                           <input class="checkbox" type="checkbox">
-                           Resolve all the low priority tickets due today
-                           </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                     </li>
-                     <li class="completed">
-                        <div class="form-check">
-                           <label class="form-check-label">
-                           <input class="checkbox" type="checkbox" checked>
-                           Schedule meeting for next week
-                           </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                     </li>
-                     <li class="completed">
-                        <div class="form-check">
-                           <label class="form-check-label">
-                           <input class="checkbox" type="checkbox" checked>
-                           Project review
-                           </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                     </li>
-                  </ul>
-               </div>
-               <h4 class="px-3 text-muted mt-5 fw-light mb-0">Events</h4>
-               <div class="events pt-4 px-3">
-                  <div class="wrapper d-flex mb-2">
-                     <i class="ti-control-record text-primary me-2"></i>
-                     <span>Feb 11 2018</span>
-                  </div>
-                  <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
-                  <p class="text-gray mb-0">The total number of sessions</p>
-               </div>
-               <div class="events pt-4 px-3">
-                  <div class="wrapper d-flex mb-2">
-                     <i class="ti-control-record text-primary me-2"></i>
-                     <span>Feb 7 2018</span>
-                  </div>
-                  <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
-                  <p class="text-gray mb-0 ">Call Sarah Graves</p>
-               </div>
+            <div class="col-lg-3 col-md-6 col-sm-12" id="turbidityGauge">
+                <div class="gauge-title">Turbidity (NTU)</div>
             </div>
-            <!-- To do section tab ends -->
-            <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
-               <div class="d-flex align-items-center justify-content-between border-bottom">
-                  <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
-                  <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 fw-normal">See All</small>
-               </div>
-               <ul class="chat-list">
-                  <li class="list active">
-                     <div class="profile"><img src="images/faces/face1.jpg" alt="image"><span class="online"></span></div>
-                     <div class="info">
-                        <p>Thomas Douglas</p>
-                        <p>Available</p>
-                     </div>
-                     <small class="text-muted my-auto">19 min</small>
-                  </li>
-                  <li class="list">
-                     <div class="profile"><img src="images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
-                     <div class="info">
-                        <div class="wrapper d-flex">
-                           <p>Catherine</p>
-                        </div>
-                        <p>Away</p>
-                     </div>
-                     <div class="badge badge-success badge-pill my-auto mx-2">4</div>
-                     <small class="text-muted my-auto">23 min</small>
-                  </li>
-                  <li class="list">
-                     <div class="profile"><img src="images/faces/face3.jpg" alt="image"><span class="online"></span></div>
-                     <div class="info">
-                        <p>Daniel Russell</p>
-                        <p>Available</p>
-                     </div>
-                     <small class="text-muted my-auto">14 min</small>
-                  </li>
-                  <li class="list">
-                     <div class="profile"><img src="images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
-                     <div class="info">
-                        <p>James Richardson</p>
-                        <p>Away</p>
-                     </div>
-                     <small class="text-muted my-auto">2 min</small>
-                  </li>
-                  <li class="list">
-                     <div class="profile"><img src="images/faces/face5.jpg" alt="image"><span class="online"></span></div>
-                     <div class="info">
-                        <p>Madeline Kennedy</p>
-                        <p>Available</p>
-                     </div>
-                     <small class="text-muted my-auto">5 min</small>
-                  </li>
-                  <li class="list">
-                     <div class="profile"><img src="images/faces/face6.jpg" alt="image"><span class="online"></span></div>
-                     <div class="info">
-                        <p>Sarah Graves</p>
-                        <p>Available</p>
-                     </div>
-                     <small class="text-muted my-auto">47 min</small>
-                  </li>
-               </ul>
+        </div>
+    
+        <!-- Download Button -->
+        <div class="text-center m-5">
+            <a href="#" class="btn btn-primary">Download Summary</a>
+        </div>
+    </div>
+    
+    
+
+<div class="container-wrapper m-3">
+    <div class="clock-calendar">
+       <div class="clock">
+          <h4>Current Time</h4>
+          <p id="currentDateTime"></p>
+       </div>
+       <div class="calendar">
+          <h4>Current Date</h4>
+          <p id="currentDate"></p>
+       </div>
+    </div>
+</div>
+
+     <!-- End custom js for this page-->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <!-- Image 1 -->
+            <div class="col-sm-4">
+                <img src="path/to/image1.jpg" alt="Image 1" class="footer-image">
             </div>
-            <!-- chat tab ends -->
-         </div>
-      </div>
-      <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-         <ul class="nav">
-            <li class="nav-item">
-               <a class="nav-link" href="index.html">
-               <i class="mdi mdi-grid-large menu-icon"></i>
-               <span class="menu-title">Dashboard</span>
-               </a>
-            </li>
-            <!-- <li class="nav-item">
-               <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-                   <i class="menu-icon mdi mdi-chart-line"></i>
-                   <span class="menu-title">Charts</span>
-                   <i class="menu-arrow"></i>
-               </a>
-               <div class="collapse" id="charts">
-                   <ul class="nav flex-column sub-menu">
-                       <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
-                   </ul>
-               </div>
-               </li> -->
-         </ul>
-      </nav>
-      <!-- partial -->
-      <div class="main-panel">
-      <div class="content-wrapper">
-      <div class="row">
-      <div class="col-sm-12">
-      <div class="home-tab">
-      <div class="d-sm-flex align-items-center justify-content-between border-bottom">
-         <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-               <a class="nav-link active ps-0" id="home-tab" data-bs-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#audiences" role="tab" aria-selected="false">Audiences</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#demographics" role="tab" aria-selected="false">Demographics</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab" aria-selected="false">More</a>
-            </li>
-         </ul>
-         <div>
-            <div class="btn-wrapper">
-               <a href="#" class="btn btn-otline-dark align-items-center"><i class="icon-share"></i> Share</a>
-               <a href="#" class="btn btn-otline-dark"><i class="icon-printer"></i> Print</a>
-               <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a>
+            <!-- Developer Information -->
+            <div class="col-sm-4 text-muted text-center text-sm-left d-block d-sm-inline-block">
+                Developed By <a href="https://fablabiub.com/" target="_blank">FABLAB IUB</a>
             </div>
-         </div>
-      </div>
-      <div class="tab-content tab-content-basic">
-      <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
-      <div class="row">
-      <div class="col-sm-12">
-         <div class="statistics-details d-flex align-items-center justify-content-between">
-            <div>
-               <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
-                  <!-- Row 1 -->
-                  <!-- Row 1 -->
-                  <div style="display: flex; flex-direction: row; align-items: center; gap: 20px;">
-                     <div id="phGauge">
-                        <div class="gauge-title">pH</div>
-                     </div>
-                     <div id="dissolvedOxygenGauge">
-                        <div class="gauge-title">Dissolved Oxygen (mg/L)</div>
-                     </div>
-                     <div id="orpGauge">
-                        <div class="gauge-title">ORP (mV)</div>
-                     </div>
-                  </div>
-                  <!-- Row 2 -->
-                  <div style="display: flex; flex-direction: row; align-items: center; gap: 20px;">
-                     <div id="conductivityGauge">
-                        <div class="gauge-title">Conductivity (µS/cm)</div>
-                     </div>
-                     <div id="temperatureGauge">
-                        <div class="gauge-title">Temperature (°C)</div>
-                     </div>
-                     <div id="tdsGauge">
-                        <div class="gauge-title">Total Dissolved Solids (TDS ppm)</div>
-                     </div>
-                     <div id="turbidityGauge">
-                        <div class="gauge-title">Turbidity (NTU)</div>
-                     </div>
-                  </div>
-                  <script>
-                     function createGauge(elementId, title, max) {
-                         var gauge = new JustGage({
-                             id: elementId,
-                             value: 0,
-                             min: 0,
-                             max: max,
-                             title: title,
-                             label: '',
-                             showMinMax: false,
-                             levelColors: ['#FF0000', '#FFFF00', '#00FF00']
-                         });
-                     
-                         return gauge;
-                     }
-                     
-                     var phGauge = createGauge('phGauge', 'pH', 14);
-                     var dissolvedOxygenGauge = createGauge('dissolvedOxygenGauge', 'Dissolved Oxygen (mg/L)', 10);
-                     var orpGauge = createGauge('orpGauge', 'ORP (mV)', 500);
-                     var conductivityGauge = createGauge('conductivityGauge', 'Conductivity (µS/cm)', 1000);
-                     var temperatureGauge = createGauge('temperatureGauge', 'Temperature (°C)', 50);
-                     var tdsGauge = createGauge('tdsGauge', 'Total Dissolved Solids (TDS ppm)', 500);
-                     var turbidityGauge = createGauge('turbidityGauge', 'Turbidity (NTU)', 10);
-                     
-                     function updateGauges() {
-                         updateGauge(phGauge, 'pH');
-                         updateGauge(dissolvedOxygenGauge, 'mg/L');
-                         updateGauge(orpGauge, 'mV');
-                         updateGauge(conductivityGauge, 'µS/cm');
-                         updateGauge(temperatureGauge, '°C');
-                         updateGauge(tdsGauge, 'ppm');
-                         updateGauge(turbidityGauge, 'NTU');
-                     }
-                     
-                     function updateGauge(gauge, sensorTitle) {
-                         var sensorValue = fetchSensorData(sensorTitle);
-                         gauge.refresh(sensorValue);
-                     }
-                     
-                     setInterval(updateGauges, 5000);
-                     updateGauges();
-                     
-                     function fetchTemperatureData() {
-                         return Math.random() * (40 + 10) - 10;
-                     }
-                     
-                     function fetchSensorData(sensorTitle) {
-                         if (sensorTitle === 'pH') {
-                             return Math.random() * 14;
-                         } else if (sensorTitle === 'mg/L') {
-                             return Math.random() * 10;
-                         } else if (sensorTitle === 'mV') {
-                             return Math.random() * 500;
-                         } else if (sensorTitle === 'µS/cm') {
-                             return Math.random() * 1000;
-                         } else if (sensorTitle === '°C') {
-                             return Math.random() * (40 + 10) - 10;
-                         } else if (sensorTitle === 'ppm') {
-                             return Math.random() * 500;
-                         } else if (sensorTitle === 'NTU') {
-                             return Math.random() * 10;
-                         } else {
-                             return Math.random() * 100;
-                         }
-                     }
-                  </script>
-               </div>
-               <style>
-                  .container-wrapper {
-                  display: flex;
-                  flex-direction: column;
-                  gap: 20px;
-                  padding-right: 20px;
-                  /* Adjust the padding as needed */
-                  background-color: #f8f9fa;
-                  /* Background color for the padding */
-                  border-radius: 10px;
-                  /* Add border-radius for a rounded appearance */
-                  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                  /* Add a subtle box shadow for depth */
-                  }
-                  .clock-calendar {
-                  /* display: flex; */
-                  /* flex-direction: column; */
-                  /* align-items: flex-end; */
-                  padding-bottom: 20px;
-                  /* Add padding underneath the clock and calendar */
-                  text-align: center;
-                  }
-                  h4,
-                  p {
-                  font-size: 1.5em;
-                  /* Increase font size */
-                  margin: 0;
-                  /* Remove default margin */
-                  }
-               </style>
-               </head>
-               <body>
-                  <div class="container-wrapper">
-                     <!-- Row 1 -->
-                     <div style="display: flex; flex-direction: row; align-items: center; gap: 20px;">
-                        <!-- ... Gauges for Row 1 ... -->
-                     </div>
-                     <!-- Row 2 -->
-                     <div style="display: flex; flex-direction: row; align-items: center; gap: 20px;">
-                        <!-- ... Gauges for Row 2 ... -->
-                     </div>
-                     <!-- Clock and Calendar -->
-                     <div class="clock-calendar">
-                        <div class="clock">
-                           <h4>Current Time</h4>
-                           <p id="currentDateTime"></p>
-                        </div>
-                        <div class="calendar">
-                           <h4>Current Date</h4>
-                           <p id="currentDate"></p>
-                        </div>
-                     </div>
-                     <script>
-                        function updateDateTime() {
-                            var dateTimeElement = document.getElementById('currentDateTime');
-                            var currentDateElement = document.getElementById('currentDate');
-                            var currentDateTime = new Date();
-                            var options = {
-                                weekday: 'long',
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric',
-                                hour: 'numeric',
-                                minute: 'numeric',
-                                second: 'numeric',
-                                timeZoneName: 'short'
-                            };
-                            var formattedDateTime = currentDateTime.toLocaleDateString('en-US', options);
-                            var formattedDate = currentDateTime.toLocaleDateString('en-US', {
-                                weekday: 'long',
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric'
-                            });
-                        
-                            dateTimeElement.textContent = formattedDateTime;
-                            currentDateElement.textContent = formattedDate;
-                        }
-                        
-                        // Update date and time every second
-                        setInterval(updateDateTime, 1000);
-                        
-                        // Initial call to display date and time
-                        updateDateTime();
-                     </script>
-                  </div>
-                  <!-- partial -->
+            <!-- Image 2 -->
+            <div class="col-sm-4 text-right">
+                <img src="path/to/image2.jpg" alt="Image 2" class="footer-image">
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved by Fablab IUB.</span>
             </div>
-            <!-- main-panel ends -->
-         </div>
-         <!-- page-body-wrapper ends -->
-      </div>
-      <!-- container-scroller -->
-      <!-- plugins:js -->
-      <script src="vendors/js/vendor.bundle.base.js"></script>
-      <!-- endinject -->
-      <!-- Plugin js for this page -->
-      <script src="vendors/chart.js/Chart.min.js"></script>
-      <script src="vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-      <script src="vendors/progressbar.js/progressbar.min.js"></script>
-      <!-- End plugin js for this page -->
-      <!-- inject:js -->
-      <script src="js/off-canvas.js"></script>
-      <script src="js/hoverable-collapse.js"></script>
-      <script src="js/template.js"></script>
-      <script src="js/settings.js"></script>
-      <script src="js/todolist.js"></script>
-      <!-- endinject -->
-      <!-- Custom js for this page-->
-      <script src="js/dashboard.js"></script>
-      <script src="js/Chart.roundedBarCharts.js"></script>
-      <!-- End custom js for this page-->
-      <footer class="footer">
-      <div class="d-sm-flex justify-content-center justify-content-sm-between">
-      <!-- Image 1 -->
-      <img src="path/to/image1.jpg" alt="Image 1" class="footer-image">
-      <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Developed By <a href="https://fablabiub.com/" target="_blank">FABLAB IUB</a> </span>
-      <!-- Image 2 -->
-      <img src="path/to/image2.jpg" alt="Image 2" class="footer-image">
-      <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All
-      rights reserved by Fablab IUB.</span>
-      <!-- Image 3 -->
-      <img src="images/" alt="Image 3" class="footer-image">
-      </div>
-      </footer>
+        </div>
+    </div>
+</footer>
+
    </body>
+   <script src="script.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </html>
 </html>
